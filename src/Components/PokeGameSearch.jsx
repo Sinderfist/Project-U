@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PokeGameDisplay from './PokeGameDisplay';
 
 class PokeGameSearch extends Component {
     constructor() {
@@ -21,7 +22,7 @@ class PokeGameSearch extends Component {
         event.preventDefault();
         console.log("submitting pokeSearch")
         const query = this.state.userInput
-        const url = `https://pokeapi.co/api/v2/pokemon/${query}`
+        const url = `https://pokeapi.co/api/v2/version-group/${query}/`
         try {
             const response = await fetch(url);
             const data = await response.json();
@@ -36,11 +37,14 @@ class PokeGameSearch extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='pokeGameDisplay'>
+                <h1>PokeGame Search</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <input value={this.state.userInput} onChange={this.handleChange} />
+                    <input value={this.state.userInput} onChange={this.handleChange} placeholder='Number 1 - 20' />
                     <button typeof='submit'>Search </button>
                 </form>
+                <PokeGameDisplay gameData={this.state.data}/>
+                {/* {console.log(this.state.data)} */}
             </div>
         );
     }

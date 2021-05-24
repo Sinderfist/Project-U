@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import PokeDisplay from './PokeDisplay';
+import PokeBallDisplay from './PokeBallDisplay';
 
-class PokeSearch extends Component {
+class PokeBallSearch extends Component {
     constructor() {
         super()
         this.state = {
             data: '',
             userInput: '',
+            
         }
     }
 
@@ -35,11 +36,11 @@ class PokeSearch extends Component {
 
     }
 
-
     handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("submitting pokeSearch")
         const query = this.state.userInput
-        const url = `https://pokeapi.co/api/v2/pokemon/${query}`
+        const url = `https://pokeapi.co/api/v2/item/${query}`
         try {
             const response = await fetch(url);
             const data = await response.json();
@@ -55,13 +56,14 @@ class PokeSearch extends Component {
 
     render(){
         return (
-            <div className='pokeDex'>
-                <h1>PokeSearch</h1>
-                <form onSubmit={this.handleSubmit} >
-                    <input value={this.state.userInput} onChange={this.handleChange} placeholder='Enter a name or a number'/>
+            <div>
+                <h1>PokeItem Search</h1>
+                <h3>Welcome to the Pokemon Item search <br/> In this search you will find every item that exists in the pokemon games <br/> and provides a little bit of insight about them. <br/> this list goes up number 1005</h3>
+                <form onSubmit={this.handleSubmit}>
+                    <input value={this.state.userInput} onChange={this.handleChange} placeholder='Please enter a number'/>
                     <button typeof='submit'>Search </button>
-                    <button onClick={this.handleSearch}>Surprise Me!</button>
-                    <PokeDisplay pokeInfo={this.state.data}/>
+                    <button typeof='search' onClick={this.handleSearch}>Surprise Me!</button>
+                    <PokeBallDisplay ballInfo={this.state.data}/>
                 </form>
             </div>
         );
@@ -69,4 +71,4 @@ class PokeSearch extends Component {
 }
 
 
-export default PokeSearch;
+export default PokeBallSearch;
